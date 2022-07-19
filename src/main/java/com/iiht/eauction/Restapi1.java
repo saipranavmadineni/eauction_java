@@ -104,22 +104,7 @@ public class Restapi1 {
 		return bidsRepository.findByproductid(Integer.toString(Id));
 	}
 	
-	
-	@CrossOrigin()
-	@RequestMapping(value = "/getAllProducts",method = RequestMethod.GET)
-	public List<Products> getAllProducts()
-	{
-		return productsRepository.findAll();
-	}
-	
-	@CrossOrigin()
-	@RequestMapping(value = "/listbids/{productname}",method = RequestMethod.GET)
-	public List<Bids> listBidsOnProductName(@PathVariable String productname)
-	{
-		Products p=productsRepository.findByproductname(productname);
-		return bidsRepository.findByproductid(Integer.toString(p.getId()));
-	}
-	
+
 	
 	
 	

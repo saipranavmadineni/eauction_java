@@ -19,7 +19,6 @@ public class Products {
 
 	@javax.persistence.Id
 	@GeneratedValue
-
 	private int Id;
 	@NotNull
 	@Size(min = 5, max = 30)

@@ -25,7 +25,7 @@ class Menu extends React.Component {
                         <li><NavLink to='/'>Home</NavLink></li>
                         <li><NavLink to='/http'>httpcall</NavLink></li>
                         <li><NavLink to='/http2'>addprod</NavLink></li>
-                        <li><NavLink to='/http3'>addbid</NavLink></li>
+                        <li><NavLink to='/http3'>placebid</NavLink></li>
                         <li><NavLink to='/http4'>updatebid</NavLink></li>
                         <li><NavLink to='/http5'>deleteprod</NavLink></li>
                         <li><NavLink to='/http6'>listbids</NavLink></li>

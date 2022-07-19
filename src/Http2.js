@@ -164,10 +164,12 @@ class Http2 extends React.Component {
                 Pin : <input type="text" name="Pin" value={this.state.pin} onChange={this.changehandler1} /><br />
                 Phone : <input type="text" name="Phone" value={this.state.phone} onChange={this.changehandler1} /><br />
                 Email :    <input type="text" name="Email" value={this.state.email} onChange={this.changehandler1} /><br />
-                Product Name : <input type="text" name="Productname" value={this.state.productname} onChange={this.changehandler1} /><br />
+                Product Name : <input type="text" name="Productname" value={this.state.productname} onChange={this.changehandler1} />
+                <br />
                 Short description : <input type="text" name="Shortdescription" value={this.state.shortdescription} onChange={this.changehandler1} /><br />
                 Detailed description : <input type="text" name="Detaileddescription" value={this.state.detaileddescription} onChange={this.changehandler1} /><br />
-                Category : <input type="text" name="Category" value={this.state.category} onChange={this.changehandler1} /><br />
+                Category : <input type="text" name="Category" value={this.state.category} onChange={this.changehandler1} />
+                <br />
                 Starting Price : <input type="text" name="Startingprice" value={this.state.startingprice} onChange={this.changehandler1} /><br />
                 Bid End Date : <input type="text" name="Bidenddate" value={this.state.bidenddate} onChange={this.changehandler1} /><br />
                 <br /> <button type="button" onClick={this.getInfo}>Submit </button>

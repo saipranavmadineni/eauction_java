@@ -4,6 +4,9 @@ package com.iiht.eauction;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Bids {
@@ -11,24 +14,32 @@ public class Bids {
 
 	@javax.persistence.Id
 	@GeneratedValue
-
 	private int Id;
+	
+	@NotNull
+	@Size(min = 5, max = 30)
 	private String firstname;
+	
+	@NotNull
+	@Size(min = 3, max = 25)
 	private String lastname;
+	
 	private String address;
 	private String city;
 	private String state;
 	private String pin;
+	
+	@NotNull
+	@Size(min = 10, max = 10,message="Phone number should be 10 digits")
 	private String phone;
+	
+	@NotNull
+	@Email
 	private String email;
 	
 	private String productid;
 	private int bidamount;
-	
-	public void Product() {
-		
-	}
-	
+
 	
 	public int getId() {
 		return Id;
@@ -117,6 +128,12 @@ public class Bids {
 	public void setbidamount(int bidamount) {
 		this.bidamount = bidamount;
 	}
+	
+	
+	public void Product() {
+		
+	}
+	
 	
 	
 }

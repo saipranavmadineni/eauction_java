@@ -2,8 +2,16 @@ package com.iiht.eauction;
 
 
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Products {
@@ -13,21 +21,37 @@ public class Products {
 	@GeneratedValue
 
 	private int Id;
+	@NotNull
+	@Size(min = 5, max = 30)
 	private String firstname;
+	
+	@NotNull
+	@Size(min = 3, max = 25)
 	private String lastname;
 	private String address;
 	private String city;
 	private String state;
 	private String pin;
+	
+	@NotNull
+	@Size(min = 10, max = 10)
 	private String phone;
+	
+	@NotNull
+	@Email
 	private String email;
 	
+	@NotNull
+	@Size(min = 5, max = 30,message="Product name should be 5-30 characters")
 	private String productname;
 	private String shortdescription;
 	private String detaileddescription;
 	private String category;
 	private int startingprice;
-	private String bidenddate;
+	
+	@Future
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate bidenddate;
 	
 	public void Product() {
 		
@@ -147,11 +171,11 @@ public class Products {
 		this.startingprice = startingprice;
 	}
 	
-	public String getbidenddate() {
+	public LocalDate getbidenddate() {
 		return bidenddate;
 	}
 
-	public void setbidenddate(String bidenddate) {
+	public void setbidenddate(LocalDate bidenddate) {
 		this.bidenddate = bidenddate;
 	}
 

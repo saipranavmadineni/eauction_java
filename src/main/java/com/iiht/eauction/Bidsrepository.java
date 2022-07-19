@@ -17,9 +17,11 @@ import com.iiht.eauction.Bids;
 @Repository
 @Transactional
 public interface Bidsrepository extends JpaRepository<Bids,Integer>{
-	Bids findByProductidAndEmail(String getproductid,String getemail);
 	void deleteByProductid(String Id);
 	List<Bids> findByproductid(String Id);
+	Bids findByProductidAndEmail(String getproductid,String getemail);
+	
+
 	
 }
 

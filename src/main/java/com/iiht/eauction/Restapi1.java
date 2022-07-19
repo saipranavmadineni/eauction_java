@@ -25,19 +25,13 @@ import com.iiht.eauction.Bids;
 @RestController
 public class Restapi1 {
 	@Autowired
-	ProductsRepository prodrep;
+	ProductsRepository productsRepository;
 	
 	@Autowired
-	Bidsrepository bidrep;
+	Bidsrepository bidsRepository;
 	
 	@CrossOrigin()
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-	return String.format("Hello %s!", name);
-	}
-	
-	@CrossOrigin()
-	@RequestMapping(value = "/addprod",method=RequestMethod.POST, headers = "Accept=application/json"  )
+	@RequestMapping(value = "/e-auction/api/v1/seller/add-product",method=RequestMethod.POST, headers = "Accept=application/json"  )
 	public Products createprod(@RequestBody Products prod) {
 		
 		Products prod1  = new Products();
@@ -57,12 +51,12 @@ public class Restapi1 {
 		prod1.setstartingprice(prod.getstartingprice());
 		prod1.setbidenddate(prod.getbidenddate());
 				
-		prodrep.save(prod1);
+		productsRepository.save(prod1);
 		return prod1;
 	}
 	
 	@CrossOrigin()
-	@RequestMapping(value = "/addbid",method=RequestMethod.POST, headers = "Accept=application/json"  )
+	@RequestMapping(value = "/e-auction/api/v1/buyer/place-bid",method=RequestMethod.POST, headers = "Accept=application/json"  )
 	public Bids createbid(@RequestBody Bids bid) {
 		
 		Bids bid1  = new Bids();
@@ -79,34 +73,57 @@ public class Restapi1 {
 		bid1.setbidamount(bid.getbidamount());
 		
 		
-		bidrep.save(bid1);
+		bidsRepository.save(bid1);
 		return bid1;
 	}
 	
 	
 	@CrossOrigin()
-	@RequestMapping(value = "/updatebid",method=RequestMethod.POST, headers = "Accept=application/json"  )
-	public Bids updatebid(@RequestBody Bids bid) {
+	@RequestMapping(value = "/e-auction/api/v1/buyer/update-bid/{productid}/{email}/{bidamount}",method=RequestMethod.POST, headers = "Accept=application/json"  )
+	public Bids updatebid(@PathVariable String productid,@PathVariable String email ,@PathVariable int bidamount) {
 		Bids bid1  =new Bids();
 		
-		bid1 = bidrep.findByProductidAndEmail(bid.getproductid(),bid.getemail());
+		bid1 = bidsRepository.findByProductidAndEmail(productid,email);
 		
-		bid1.setbidamount(bid.getbidamount());
-		bidrep.save(bid1);
+		bid1.setbidamount(bidamount);
+		bidsRepository.save(bid1);
 		return bid1;
 	}
 	
 	@CrossOrigin()
-	@RequestMapping(value = "/deleteprod/{Id}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "/e-auction/api/v1/seller/delete/{Id}",method = RequestMethod.DELETE)
 	public void delete(@PathVariable int Id) {	
-		bidrep.deleteByProductid(Integer.toString(Id));
-		prodrep.deleteById(Id);
+		bidsRepository.deleteByProductid(Integer.toString(Id));
+		productsRepository.deleteById(Id);
 	}
 	
 	@CrossOrigin()
-	@RequestMapping(value = "/listbids/{Id}",method = RequestMethod.GET)
-	public List<Bids> listBids(@PathVariable int Id) {	
-		return bidrep.findByproductid(Integer.toString(Id));
+	@RequestMapping(value = "/e-auction/api/v1/seller/show-bids/{Id}",method = RequestMethod.GET)
+	public List<Bids> listBids(@PathVariable int Id)
+	{
+		return bidsRepository.findByproductid(Integer.toString(Id));
 	}
 	
+	
+	@CrossOrigin()
+	@RequestMapping(value = "/getAllProducts",method = RequestMethod.GET)
+	public List<Products> getAllProducts()
+	{
+		return productsRepository.findAll();
+	}
+	
+	@CrossOrigin()
+	@RequestMapping(value = "/listbids/{productname}",method = RequestMethod.GET)
+	public List<Bids> listBidsOnProductName(@PathVariable String productname)
+	{
+		Products p=productsRepository.findByproductname(productname);
+		return bidsRepository.findByproductid(Integer.toString(p.getId()));
+	}
+	
+	
+	
+	
+	
+	
+
 }

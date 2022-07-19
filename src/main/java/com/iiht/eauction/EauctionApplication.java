@@ -1,3 +1,4 @@
+
 package com.iiht.eauction;
 
 import org.springframework.boot.SpringApplication;
@@ -9,5 +10,7 @@ public class EauctionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EauctionApplication.class, args);
 	}
+
+	
 
 }
